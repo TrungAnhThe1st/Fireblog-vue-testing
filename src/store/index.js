@@ -5,6 +5,28 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    sampleBlogCards: [
+      {
+        blogTitle: "BlogCard1",
+        blogCoverPhoto: "stock-1",
+        blogDate: "August 1, 2022"
+      },
+      {
+        blogTitle: "BlogCard2",
+        blogCoverPhoto: "stock-2",
+        blogDate: "August 1, 2022"
+      },
+      {
+        blogTitle: "BlogCard3",
+        blogCoverPhoto: "stock-3",
+        blogDate: "August 1, 2022"
+      },
+      {
+        blogTitle: "BlogCard4",
+        blogCoverPhoto: "stock-4",
+        blogDate: "August 1, 2022"
+      }
+    ]
   },
   mutations: {
   },
