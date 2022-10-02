@@ -1,6 +1,6 @@
 <template>
     <div class="blog-card">
-        <div class="icons">
+        <div v-show="editPost" class="icons">
             <div class="icon">
                 <Edit class="edit" />
             </div>
@@ -13,7 +13,8 @@
             <h4>{{post.blogTitle}}</h4>
             <h6>Posted on: {{post.blogDate}}</h6>
             <router-link class="link" to="#">
-                View the post <Arrow class="arrow"/>
+                View the post
+                <Arrow class="arrow" />
             </router-link>
         </div>
     </div>
@@ -39,6 +40,11 @@ export default {
     },
     methods: {
     },
+    computed: {
+        editPost() {
+            return this.$store.state.editPost
+        }
+    }
 
 }
 </script>
