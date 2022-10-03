@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <Navigation />
+      <Navigation v-if="!navigation"/>
       <router-view />
-      <Footer />
+      <Footer v-if="!navigation" />
     </div>
   </div>
 </template>
@@ -11,6 +11,7 @@
 <script>
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+
 export default {
   name: "app",
   components: { Navigation, Footer },
@@ -19,7 +20,9 @@ export default {
       navigation: null
     };
   },
-  created() { },
+  created() {
+    this.checkRoute()
+  },
   mounted() { },
   methods: {
     checkRoute() {
@@ -30,7 +33,11 @@ export default {
       this.navigation = false
     }
   },
-  watch: {},
+  watch: {
+    $route() {
+      this.checkRoute()
+    }
+  },
 };
 </script>
 
