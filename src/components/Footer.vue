@@ -32,7 +32,7 @@
             <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
             <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
             <router-link class="link" to="#">Create Post</router-link>
-            <router-link class="link" :to="{ name: 'Login' }">Login In / Register</router-link>
+            <router-link v-if="!user" class="link" :to="{ name: 'Login' }">Login In / Register</router-link>
           </ul>
         </div>
       </div>
@@ -52,6 +52,11 @@ import linkedin from "../assets/Icons/linkedin-brands.svg";
 export default {
   name: "footer-vue",
   components: { youTube, twitter, instagram, linkedin },
+  computed: {
+    user(){
+      return this.$store.state.user;
+    }
+  }
 };
 </script>
 
