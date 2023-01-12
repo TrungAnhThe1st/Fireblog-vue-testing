@@ -2,13 +2,13 @@
   <header>
     <nav class="container">
       <div class="branding">
-        <router-link class="header" :to="{ name: 'Home' }">Fireblogs</router-link>
+        <router-link class="header" :to="{ name: 'Home' }">FireBlogs</router-link>
       </div>
       <div class="nav-links">
         <ul v-show="!mobile">
           <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
           <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-          <router-link class="link" to="#">Create post</router-link>
+          <router-link v-if="user" class="link" :to="{ name: 'CreatePost' }">Create post</router-link>
           <router-link v-if="!user" class="link" :to="{ name: 'Login' }">Login/Register</router-link>
         </ul>
         <div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
@@ -16,31 +16,31 @@
           <div v-show="profileMenu" class="profile-menu">
             <div class="info">
               <p class="initials">
-                {{this.$store.state.profileInitials}}
+                {{ this.$store.state.profileInitials }}
               </p>
               <div class="right">
                 <p>{{ this.$store.state.profileFirstName }} {{ this.$store.state.profileLastName }}</p>
                 <p>{{ this.$store.state.profileUsername }}</p>
-                <p>{{ this.$store.state.profileEmail }}</p>                
+                <p>{{ this.$store.state.profileEmail }}</p>
               </div>
             </div>
             <div class="options">
               <div class="option">
                 <router-link class="option" :to="{ name: 'Profile' }">
                   <userIcon class="icon" />
-                    <p>Profile</p>       
+                  <p>Profile</p>
                 </router-link>
               </div>
               <div class="option">
                 <router-link class="option" :to="{ name: 'Admin' }">
                   <adminIcon class="icon" />
-                    <p>Admin</p>       
+                  <p>Admin</p>
                 </router-link>
               </div>
               <div @click="signOut" class="option">
                 <router-link class="option" to="#">
                   <signOutIcon class="icon" />
-                    <p>Sign Out</p>       
+                  <p>Sign Out</p>
                 </router-link>
               </div>
             </div>
@@ -53,7 +53,7 @@
       <ul class="mobile-nav" v-show="mobileNav">
         <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
         <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-        <router-link class="link" to="#">Create post</router-link>
+        <router-link v-if="user" class="link" :to="{ name: 'CreatePost' }">Create post</router-link>
         <router-link v-if="!user" class="link" :to="{ name: 'Login' }">Login/Register</router-link>
       </ul>
     </transition>
@@ -103,19 +103,19 @@ export default {
     toggleMobileNav() {
       this.mobileNav = !this.mobileNav
     },
-    toggleProfileMenu(e){
-      if(e.target === this.$refs.profile){
+    toggleProfileMenu(e) {
+      if (e.target === this.$refs.profile) {
         this.profileMenu = !this.profileMenu;
       }
     },
-    signOut(){
+    signOut() {
       firebase.auth().signOut()
       window.location.reload()
     }
   },
 
   computed: {
-    user(){
+    user() {
       return this.$store.state.user;
     }
   }
@@ -126,8 +126,7 @@ export default {
 header {
   background-color: #fff;
   padding: 0 25px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   z-index: 99;
 
   .link {
@@ -197,8 +196,7 @@ header {
           right: 0;
           width: 250px;
           background-color: #303030;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
           .info {
             display: flex;

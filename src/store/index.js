@@ -29,6 +29,11 @@ export default new Vuex.Store({
                 blogDate: "August 1, 2022"
             },
         ],
+        blogHTML: "Write your blog title here...",
+        blogTitle: "",
+        blogPhotoName: "",
+        blogPhotoFileURL: null,
+        blogPhotoPreview: false,
         editPost: null,
         user: null,
         profileEmail: null,
@@ -65,8 +70,23 @@ export default new Vuex.Store({
         },
         changeUserName(state, payload) {
             state.profileUsername = payload
+        },
+        newBlogPost(state, payload) {
+            state.blogHTML = payload
+            console.log(state.blogHTML)
+        },
+        updateBlogTitle(state, payload) {
+            state.blogTitle = payload
+        },
+        fileNameChange(state, payload) {
+            state.blogPhotoName = payload
+        },
+        createFileURL(state, payload) {
+            state.blogPhotoFileURL = payload
+        },
+        openPhotoPreview(state) {
+            state.blogPhotoPreview = !state.blogPhotoPreview
         }
-
     },
     actions: {
         async getCurrentUser({ commit }) {
