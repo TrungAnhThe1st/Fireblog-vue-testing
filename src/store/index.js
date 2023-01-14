@@ -75,6 +75,15 @@ export default new Vuex.Store({
         },
         openPhotoPreview(state) {
             state.blogPhotoPreview = !state.blogPhotoPreview
+        },
+        filterBlogPost(state, payload) {
+            state.blogPosts = state.blogPosts.filter(post => post.blogID !== payload)
+        },
+        setBlogState(state, payload) {
+            state.blogTitle = payload.blogTitle;
+            state.blogHTML = payload.blogHTML;
+            state.blogPhotoFileURL = payload.blogCoverPhoto;
+            state.blogPhotoName = payload.blogCoverPhotoName;
         }
     },
     actions: {
@@ -116,6 +125,16 @@ export default new Vuex.Store({
 
             state.postLoaded = true
             console.log(state.blogPosts)
+        },
+        async deletePost({ commit }, payload) {
+            const getPost = await db.collection("blogPosts").doc(payload)
+            await getPost.delete()
+            commit("filterBlogPost", payload)
+        },
+        async updatePost({ commit, dispatch }, payload) {
+            commit("filterBlogPost", payload)
+            await dispatch("getPost")
+
         }
     },
     modules: {},
